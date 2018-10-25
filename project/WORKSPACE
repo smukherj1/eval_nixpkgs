@@ -1,0 +1,25 @@
+http_archive(
+    name = "io_tweag_rules_nixpkgs",
+    strip_prefix = "rules_nixpkgs-711b472314e0edb3a6b23837fd0f94de2fdc7997",
+    urls = ["https://github.com/tweag/rules_nixpkgs/archive/711b472314e0edb3a6b23837fd0f94de2fdc7997.tar.gz"],
+)
+
+load("@io_tweag_rules_nixpkgs//nixpkgs:nixpkgs.bzl", "nixpkgs_git_repository", "nixpkgs_package")
+
+nixpkgs_git_repository(
+    name = "nixpkgs",
+    revision = "18.09", # Any tag or commit hash
+)
+
+nixpkgs_package(
+    name= "python-2.7.15",
+    attribute_path= "python27Packages.python",
+    repositories = {"@nixpkgs": "nixpkgs"}
+)
+
+nixpkgs_package(
+    name = "python2.7-Flask-1.0.2",
+    attribute_path= "python27Packages.flask",
+    repositories = { "@nixpkgs": "nixpkgs" }
+)
+
