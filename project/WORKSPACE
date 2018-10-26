@@ -13,13 +13,14 @@ nixpkgs_git_repository(
 
 nixpkgs_package(
     name= "python-2.7.15",
-    attribute_path= "python27Packages.python",
-    repositories = {"@nixpkgs": "nixpkgs"}
+    nix_file= "//:python.nix",
+    repositories = {"nixpkgs": "@nixpkgs//:default.nix"},
+    build_file_content= """
+package(default_visibility = ["//visibility:public"])
+filegroup(
+    name = "interpreter",
+    srcs = ["bin/python"],
 )
-
-nixpkgs_package(
-    name = "python2.7-Flask-1.0.2",
-    attribute_path= "python27Packages.flask",
-    repositories = { "@nixpkgs": "nixpkgs" }
+"""
 )
 

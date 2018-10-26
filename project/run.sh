@@ -3,4 +3,4 @@
 
 set -ex
 
-bazel build :app
+bazel run :app
